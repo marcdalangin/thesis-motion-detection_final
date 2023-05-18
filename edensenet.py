@@ -3,11 +3,14 @@ import tensorflow as tf
 from tensorflow import keras
 from keras import layers
 from keras.utils import to_categorical
+from keras.utils import plot_model
 from keras.callbacks import TensorBoard
 import os
 import cv2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+from IPython.display import Image
+from ann_visualizer.visualize import ann_viz
 
 # Model / data parameters
 num_classes = 10  # Number of classes in your dataset
@@ -117,10 +120,14 @@ model = keras.Sequential(
 
 
 # Train the model
-print(model.summary())
+model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
 score = model.evaluate(x_test, y_test, verbose=0)
 model.save('edensenet.h5')
+# plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
+# # Image(filename='model.png')
+# # ann_viz(model, filename='edensenet.gv',  title="Enhanced Dense Convolutional Neural Network")
+
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
