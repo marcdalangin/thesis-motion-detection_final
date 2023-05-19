@@ -90,7 +90,7 @@ model = keras.Sequential(
         layers.Activation("relu"),
         layers.Conv2D(128, kernel_size=(3, 3), padding='same'),
         layers.Dropout(0.4),
-        # Second transition layer
+        # Second transition layer)
         layers.Conv2D(128, kernel_size=(1, 1), padding='same'),
         layers.Conv2D(128, kernel_size=(3, 3), padding='same'),
         layers.MaxPooling2D(pool_size=(2, 2)),
@@ -121,10 +121,10 @@ model = keras.Sequential(
 
 # Train the model
 model.summary()
-model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
-score = model.evaluate(x_test, y_test, verbose=0)
-model.save('edensenet.h5')
+# model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+# model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
+# score = model.evaluate(x_test, y_test, verbose=0)
+# model.save('edensenet.h5')
 # plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
 # # Image(filename='model.png')
 # # ann_viz(model, filename='edensenet.gv',  title="Enhanced Dense Convolutional Neural Network")
