@@ -9,8 +9,8 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
-from IPython.display import Image
-from ann_visualizer.visualize import ann_viz
+# from IPython.display import Image
+# from ann_visualizer.visualize import ann_viz
 
 # Model / data parameters
 num_classes = 10  # Number of classes in your dataset
@@ -20,7 +20,7 @@ epochs = 50
 DATADIR = "rgb_mixed_dataset"
 CATEGORIES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 NAME = "edensenet{}".format(epochs)
-tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
+# tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
 
 
 # Load the data and split it between train and test sets
@@ -121,13 +121,12 @@ model = keras.Sequential(
 
 # Train the model
 model.summary()
-# model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-# model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
-# score = model.evaluate(x_test, y_test, verbose=0)
-# model.save('edensenet.h5')
+model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
+model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
+score = model.evaluate(x_test, y_test, verbose=0)
+model.save('edensenet.h5')
 # plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
-# # Image(filename='model.png')
-# # ann_viz(model, filename='edensenet.gv',  title="Enhanced Dense Convolutional Neural Network")
-
+# Image(filename='model.png')
+# ann_viz(model, filename='edensenet.gv',  title="Enhanced Dense Convolutional Neural Network")
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])

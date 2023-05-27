@@ -36,7 +36,7 @@ def predict_hand_gesture(image):
 
 # Load and process the user input image
 
-user_input_image = cv2.imread('train_dataset/10/33.jpg')
+user_input_image = cv2.imread('train_dataset/10/1111.jpg')
 user_input_image = cv2.resize(user_input_image, (28, 28))
 predicted_label, confidence = predict_hand_gesture(user_input_image)
 
