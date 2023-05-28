@@ -122,7 +122,7 @@ model = keras.Sequential(
 # Train the model
 model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1,  callbacks=[tensorboard])
+model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 score = model.evaluate(x_test, y_test, verbose=0)
 model.save('edensenet.h5')
 # plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
