@@ -1,2 +1,2 @@
 import netron as nt
-nt.start("edensenet.h5")
+nt.start("orig_edensenet.h5")
