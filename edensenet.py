@@ -17,7 +17,7 @@ num_classes = 10  # Number of classes in your dataset
 input_shape = (28, 28, 3)
 batch_size = 16
 epochs = 50
-DATADIR = "rgb_mixed_dataset"
+DATADIR = "rgb_mixed_train_dataset"
 CATEGORIES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 NAME = "edensenet{}".format(epochs)
 # tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
@@ -124,9 +124,7 @@ model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 score = model.evaluate(x_test, y_test, verbose=0)
-# model.save('edensenet.h5')
-# plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
-# Image(filename='model.png')
-# ann_viz(model, filename='edensenet.gv',  title="Enhanced Dense Convolutional Neural Network")
-# print("Test loss:", score[0])
-# print("Test accuracy:", score[1])
+model.save('trained_model_0821.h5')
+plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
+print("Test loss:", score[0])
+print("Test accuracy:", score[1])
