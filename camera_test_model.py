@@ -1,0 +1,77 @@
+import cv2
+import numpy as np
+from keras.models import load_model
+
+# Load the pre-trained model
+model = load_model('model/trained_model_0821.h5')
+
+# Define the class labels for hand gestures
+CATEGORIES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+# Function to preprocess the input image
+def preprocess_image(image):
+    image = cv2.resize(image, (28, 28))
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = image.astype('float32') / 255.0
+    return image
+
+# Function to predict the hand gesture
+def predict_hand_gesture(image):
+    processed_image = preprocess_image(image)
+    prediction = model.predict(np.array([processed_image]))
+    predicted_class_index = np.argmax(prediction)
+    predicted_class_label = CATEGORIES[predicted_class_index]
+    confidence = prediction[0][predicted_class_index]
+    return predicted_class_label, confidence
+
+# Capture video from the camera
+cap = cv2.VideoCapture(0)  # 0 corresponds to the default camera
+
+while True:
+    ret, frame = cap.read()  # Read a frame from the camera
+
+    if not ret:
+        break
+
+    # Flip the frame horizontally for a more intuitive view
+    frame = cv2.flip(frame, 1)
+
+    # Convert the frame to grayscale for background subtraction
+    gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    # Apply Gaussian blur to the grayscale frame
+    blurred_frame = cv2.GaussianBlur(gray_frame, (21, 21), 0)
+
+    # Define a region of interest (ROI) for the hand
+    roi = blurred_frame[50:300, 50:300]
+
+    # Get the predicted label and confidence for the hand gesture
+    predicted_label, confidence = predict_hand_gesture(roi)
+
+    # Create a mask to separate hand gesture from background
+    _, thresh = cv2.threshold(roi, 128, 255, cv2.THRESH_BINARY)
+    mask = cv2.cvtColor(thresh, cv2.COLOR_GRAY2BGR)
+    
+    # Create a black background frame
+    black_background = np.zeros_like(frame)
+
+    # Combine the hand gesture with the black background
+    black_background[50:300, 50:300] = frame[50:300, 50:300] * (mask / 255)
+    
+    # Display the predicted label and confidence on the frame
+    text = f'Predicted Gesture: {predicted_label} (Confidence: {confidence:.2f})'
+    cv2.putText(black_background, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    # Draw a bounding box around the hand region
+    cv2.rectangle(black_background, (50, 50), (300, 300), (255, 0, 0), 2)
+
+    # Display the frame
+    cv2.imshow('Hand Gesture Detection', black_background)
+
+    # Break the loop when 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+# Release the camera and close the OpenCV windows
+cap.release()
+cv2.destroyAllWindows()

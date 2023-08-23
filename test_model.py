@@ -4,7 +4,7 @@ import numpy as np
 import keras
 
 
-model = keras.models.load_model('edensenet.h5')
+model = keras.models.load_model('model/trained_model_0821.h5')
 
 # Define the class labels for hand gestures
 CATEGORIES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -36,11 +36,18 @@ def predict_hand_gesture(image):
 
 # Load and process the user input image
 
-user_input_image = cv2.imread('train_dataset/10/33.jpg')
+# user_input_image = cv2.imread('custom_dataset/6/Sign_6_17.png')
+# user_input_image = cv2.resize(user_input_image, (28, 28))
+# predicted_label, confidence = predict_hand_gesture(user_input_image)
+
+user_input_image = cv2.imread('sign_language_dataset/0/IMG_1118.JPG')
 user_input_image = cv2.resize(user_input_image, (28, 28))
 predicted_label, confidence = predict_hand_gesture(user_input_image)
+
+# user_input_image = cv2.imread('train_dataset/10/3.jpeg')
+# user_input_image = cv2.resize(user_input_image, (28, 28))
+# predicted_label, confidence = predict_hand_gesture(user_input_image)
 
 # Display the predicted label and confidence
 print('Predicted Gesture:', predicted_label)
 print('Confidence:', confidence)
-
