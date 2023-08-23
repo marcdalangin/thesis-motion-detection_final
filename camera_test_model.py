@@ -48,25 +48,27 @@ while True:
     # Get the predicted label and confidence for the hand gesture
     predicted_label, confidence = predict_hand_gesture(roi)
 
-    # Create a mask to separate hand gesture from background
-    _, thresh = cv2.threshold(roi, 128, 255, cv2.THRESH_BINARY)
-    mask = cv2.cvtColor(thresh, cv2.COLOR_GRAY2BGR)
-    
-    # Create a black background frame
-    black_background = np.zeros_like(frame)
+    # Find contours in the ROI
+    contours, _ = cv2.findContours(roi, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Combine the hand gesture with the black background
-    black_background[50:300, 50:300] = frame[50:300, 50:300] * (mask / 255)
-    
-    # Display the predicted label and confidence on the frame
-    text = f'Predicted Gesture: {predicted_label} (Confidence: {confidence:.2f})'
-    cv2.putText(black_background, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+    if contours:
+        # Find the largest contour (hand)
+        largest_contour = max(contours, key=cv2.contourArea)
+        x, y, w, h = cv2.boundingRect(largest_contour)
 
-    # Draw a bounding box around the hand region
-    cv2.rectangle(black_background, (50, 50), (300, 300), (255, 0, 0), 2)
+        # Adjust the coordinates based on the ROI's position
+        x += 50
+        y += 50
+
+        # Draw a bounding box around the hand region
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+        # Display the predicted label and confidence on the frame
+        text = f'Predicted Gesture: {predicted_label} (Confidence: {confidence:.2f})'
+        cv2.putText(frame, text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
 
     # Display the frame
-    cv2.imshow('Hand Gesture Detection', black_background)
+    cv2.imshow('Hand Gesture Detection', frame)
 
     # Break the loop when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
