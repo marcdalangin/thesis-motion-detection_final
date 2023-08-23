@@ -60,8 +60,8 @@ while True:
         x += 50
         y += 50
 
-        # Draw a bounding box around the hand region
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        # Draw a bounding box around the hand region in green
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
         # Display the predicted label and confidence on the frame
         text = f'Predicted Gesture: {predicted_label} (Confidence: {confidence:.2f})'
