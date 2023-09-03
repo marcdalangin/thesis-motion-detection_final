@@ -4,7 +4,7 @@ import numpy as np
 import keras
 
 # Load your trained model (Latest trained model should be used here)
-model = keras.models.load_model('model/trained_model_0903.h5')
+model = keras.models.load_model('model/trained_model_0903v2.h5')
 
 # Define the class labels for hand gestures
 CATEGORIES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -40,16 +40,16 @@ def predict_hand_gestures(images):
 
 # Load and process multiple user input images
 image_paths = [
-    'validation_dataset/0/Sign_0_54.png',
-    'validation_dataset/1/Sign_1_25.png',
+    'validation_dataset/0/Sign_0_60.png',
+    'validation_dataset/1/Sign_1_46.png',
     'validation_dataset/2/IMG_4101.JPG',
-    'validation_dataset/3/Sign_3_19.png',
-    'validation_dataset/4/Sign_4_19.png',
-    'validation_dataset/5/Sign_5_19.png',
-    'validation_dataset/6/Sign_6_19.png',
-    'validation_dataset/7/IMG_1165.JPG',
-    'validation_dataset/8/IMG_1156.JPG',
-    'validation_dataset/9/IMG_1147.JPG',
+    'validation_dataset/3/Sign_3_40.png',
+    'validation_dataset/4/IMG_4840.JPG',
+    'validation_dataset/5/Sign_5_24.png',
+    'validation_dataset/6/Sign_6_54.png',
+    'validation_dataset/7/Sign_7_55.png',
+    'validation_dataset/8/Sign_8_29.png',
+    'validation_dataset/9/IMG_4553.JPG',
     # Add more image paths as needed
 ]
 
@@ -59,4 +59,13 @@ predicted_labels_and_confidences = predict_hand_gestures(user_input_images)
 
 # Display the predicted labels and confidences for each image
 for i, (predicted_label, confidence) in enumerate(predicted_labels_and_confidences):
-    print(f'Image {i + 1}: Predicted Gesture: {predicted_label}, Confidence: {confidence}')
+    confidence_percentage = f'{confidence * 100:.2f}%'
+    print(f'Image {i + 1}: Predicted Gesture: {predicted_label}, Confidence: {confidence_percentage}')
+
+# Calculate the average confidence rate
+confidence_rates = [confidence for _, confidence in predicted_labels_and_confidences]
+average_confidence = np.mean(confidence_rates)
+
+# Print the average confidence rate
+average_confidence_percentage = f'{average_confidence * 100:.2f}%'
+print(f'Average Confidence Rate: {average_confidence_percentage}')

@@ -470,3 +470,102 @@ Epoch 15/15
 255/255 [==============================] - 7s 28ms/step - loss: 0.0030 - accuracy: 0.9998 - val_loss: 0.2527 - val_accuracy: 0.9647
 Test loss: 0.16026358306407928
 Test accuracy: 0.9743589758872986
+
+------------------------------------------------------------------
+trained_model_0903v2.h5
+x_train shape: (5654, 28, 28, 3)
+5654 train samples
+1131 test samples
+Model: "sequential"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #
+=================================================================
+ conv2d (Conv2D)             (None, 28, 28, 64)        1792
+
+ max_pooling2d (MaxPooling2D  (None, 14, 14, 64)       0
+ )
+
+ conv2d_1 (Conv2D)           (None, 14, 14, 64)        36928
+
+ max_pooling2d_1 (MaxPooling  (None, 7, 7, 64)         0
+ 2D)
+
+ conv2d_2 (Conv2D)           (None, 7, 7, 64)          36928
+
+ flatten (Flatten)           (None, 3136)              0
+
+ dense (Dense)               (None, 10)                31370
+
+=================================================================
+Total params: 107,018
+Trainable params: 107,018
+Non-trainable params: 0
+_________________________________________________________________
+Epoch 1/15
+255/255 [==============================] - 6s 19ms/step - loss: 1.1644 - accuracy: 0.6140 - val_loss: 0.4515 - val_accuracy: 0.8962
+Epoch 2/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.3136 - accuracy: 0.9034 - val_loss: 0.2577 - val_accuracy: 0.9360
+Epoch 3/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.1889 - accuracy: 0.9371 - val_loss: 0.2146 - val_accuracy: 0.9492
+Epoch 4/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.1338 - accuracy: 0.9570 - val_loss: 0.2517 - val_accuracy: 0.9470
+Epoch 5/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.0979 - accuracy: 0.9678 - val_loss: 0.2535 - val_accuracy: 0.9558
+Epoch 6/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0744 - accuracy: 0.9771 - val_loss: 0.2185 - val_accuracy: 0.9558
+Epoch 7/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0476 - accuracy: 0.9862 - val_loss: 0.2327 - val_accuracy: 0.9603
+Epoch 8/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.0439 - accuracy: 0.9870 - val_loss: 0.2442 - val_accuracy: 0.9558
+Epoch 9/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.0358 - accuracy: 0.9889 - val_loss: 0.2187 - val_accuracy: 0.9603
+Epoch 10/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.0259 - accuracy: 0.9931 - val_loss: 0.2844 - val_accuracy: 0.9536
+Epoch 11/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0208 - accuracy: 0.9934 - val_loss: 0.2920 - val_accuracy: 0.9426
+Epoch 12/15
+255/255 [==============================] - 5s 19ms/step - loss: 0.0314 - accuracy: 0.9926 - val_loss: 0.2364 - val_accuracy: 0.9625
+Epoch 13/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0135 - accuracy: 0.9968 - val_loss: 0.1954 - val_accuracy: 0.9581
+Epoch 14/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0072 - accuracy: 0.9978 - val_loss: 0.2598 - val_accuracy: 0.9536
+Epoch 15/15
+255/255 [==============================] - 5s 20ms/step - loss: 0.0032 - accuracy: 0.9993 - val_loss: 0.2281 - val_accuracy: 0.9713
+Test loss: 0.1514938324689865
+Test accuracy: 0.9752431511878967
+
+Validation result (image testing)
+Images tested:
+    'validation_dataset/0/Sign_0_60.png',
+    'validation_dataset/1/Sign_1_46.png',
+    'validation_dataset/2/IMG_4101.JPG',
+    'validation_dataset/3/Sign_3_40.png',
+    'validation_dataset/4/IMG_4840.JPG',
+    'validation_dataset/5/Sign_5_24.png',
+    'validation_dataset/6/Sign_6_54.png',
+    'validation_dataset/7/Sign_7_55.png',
+    'validation_dataset/8/Sign_8_29.png',
+    'validation_dataset/9/IMG_4553.JPG',
+
+Results: 
+1/1 [==============================] - 0s 97ms/step
+1/1 [==============================] - 0s 19ms/step
+1/1 [==============================] - 0s 20ms/step
+1/1 [==============================] - 0s 18ms/step
+1/1 [==============================] - 0s 18ms/step
+1/1 [==============================] - 0s 18ms/step
+1/1 [==============================] - 0s 19ms/step
+1/1 [==============================] - 0s 21ms/step
+1/1 [==============================] - 0s 19ms/step
+1/1 [==============================] - 0s 18ms/step
+Image 1: Predicted Gesture: 0, Confidence: 99.70%
+Image 2: Predicted Gesture: 1, Confidence: 99.95%
+Image 3: Predicted Gesture: 2, Confidence: 97.39%
+Image 4: Predicted Gesture: 3, Confidence: 99.09%
+Image 5: Predicted Gesture: 4, Confidence: 99.96%
+Image 6: Predicted Gesture: 5, Confidence: 99.98%
+Image 7: Predicted Gesture: 6, Confidence: 99.91%
+Image 8: Predicted Gesture: 7, Confidence: 99.33%
+Image 9: Predicted Gesture: 8, Confidence: 98.22%
+Image 10: Predicted Gesture: 9, Confidence: 99.99%
+Average Confidence Rate: 99.35%

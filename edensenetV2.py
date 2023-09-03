@@ -66,7 +66,7 @@ model = keras.Sequential(
         layers.Conv2D(64, kernel_size=(3, 3), activation="relu", padding='same'),
         layers.MaxPooling2D(2,2),
         layers.Conv2D(64, kernel_size=(3, 3), activation="relu", padding='same'),
-        layers.Flatten(), 
+        layers.Flatten(),
         layers.Dense(num_classes, activation="softmax"),
     ]
 )
@@ -76,9 +76,26 @@ model = keras.Sequential(
 # Train the model
 model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
-model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
+# model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
+history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 score = model.evaluate(x_test, y_test, verbose=0)
-model.save('trained_model_0903.h5')
+model.save('trained_model_0903v2.h5')
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
+
+# Plot the training history
+plt.figure(figsize=(10, 6))
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label='val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.ylim([0.5, 1])
+plt.legend(loc='lower right')
+plt.title('Training History')
+
+# Save the figure as a .jpg file
+plt.savefig('training_history.jpg')
+
+# Show the plot
+plt.show()

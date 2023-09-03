@@ -42,3 +42,4 @@ plt.savefig('visualization/flatten_visualization_sign-1-25.jpg', bbox_inches='ti
 
 # Display the visualization
 plt.show()
+

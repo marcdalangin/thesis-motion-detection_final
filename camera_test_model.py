@@ -3,7 +3,7 @@ import numpy as np
 from keras.models import load_model
 
 # Load the pre-trained model
-model = load_model('model/trained_model_0821.h5')
+model = load_model('model/trained_model_0903v2.h5')
 
 # Define the class labels for hand gestures
 CATEGORIES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
