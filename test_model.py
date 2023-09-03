@@ -3,13 +3,13 @@ import cv2
 import numpy as np
 import keras
 
-
-model = keras.models.load_model('model/trained_model_0821.h5')
+# Load your trained model (Latest trained model should be used here)
+model = keras.models.load_model('model/trained_model_0903.h5')
 
 # Define the class labels for hand gestures
 CATEGORIES = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-# Function to preprocess the input image
+# Function to preprocess a single input image
 def preprocess_image(image):
     # Resize the image to the input shape of the model
     image = cv2.resize(image, (28, 28))
@@ -19,35 +19,44 @@ def preprocess_image(image):
     image = image.astype('float32') / 255.0
     return image
 
+# Function to predict hand gestures for multiple images
+def predict_hand_gestures(images):
+    predictions = []
 
-# Function to predict the hand gesture
-def predict_hand_gesture(image):
-    # Preprocess the image
-    processed_image = preprocess_image(image)
-    # Make the prediction
-    prediction = model.predict(np.array([processed_image]))
-    # Get the predicted class index
-    predicted_class_index = np.argmax(prediction)
-    # Get the predicted class label
-    predicted_class_label = CATEGORIES[predicted_class_index]
-    # Get the confidence score of the prediction
-    confidence = prediction[0][predicted_class_index]
-    return predicted_class_label, confidence
+    for image in images:
+        # Preprocess the image
+        processed_image = preprocess_image(image)
+        # Make the prediction
+        prediction = model.predict(np.array([processed_image]))
+        # Get the predicted class index
+        predicted_class_index = np.argmax(prediction)
+        # Get the predicted class label
+        predicted_class_label = CATEGORIES[predicted_class_index]
+        # Get the confidence score of the prediction
+        confidence = prediction[0][predicted_class_index]
+        predictions.append((predicted_class_label, confidence))
 
-# Load and process the user input image
+    return predictions
 
-user_input_image = cv2.imread('custom_dataset/0/Sign_0_60.png')
-user_input_image = cv2.resize(user_input_image, (28, 28))
-predicted_label, confidence = predict_hand_gesture(user_input_image)
+# Load and process multiple user input images
+image_paths = [
+    'validation_dataset/0/Sign_0_54.png',
+    'validation_dataset/1/Sign_1_25.png',
+    'validation_dataset/2/IMG_4101.JPG',
+    'validation_dataset/3/Sign_3_19.png',
+    'validation_dataset/4/Sign_4_19.png',
+    'validation_dataset/5/Sign_5_19.png',
+    'validation_dataset/6/Sign_6_19.png',
+    'validation_dataset/7/IMG_1165.JPG',
+    'validation_dataset/8/IMG_1156.JPG',
+    'validation_dataset/9/IMG_1147.JPG',
+    # Add more image paths as needed
+]
 
-# user_input_image = cv2.imread('sign_language_dataset/0/IMG_1118.JPG')
-# user_input_image = cv2.resize(user_input_image, (28, 28))
-# predicted_label, confidence = predict_hand_gesture(user_input_image)
+user_input_images = [cv2.imread(image_path) for image_path in image_paths]
+user_input_images = [cv2.resize(image, (28, 28)) for image in user_input_images]
+predicted_labels_and_confidences = predict_hand_gestures(user_input_images)
 
-# user_input_image = cv2.imread('train_dataset/10/3.jpeg')
-# user_input_image = cv2.resize(user_input_image, (28, 28))
-# predicted_label, confidence = predict_hand_gesture(user_input_image)
-
-# Display the predicted label and confidence
-print('Predicted Gesture:', predicted_label)
-print('Confidence:', confidence)
+# Display the predicted labels and confidences for each image
+for i, (predicted_label, confidence) in enumerate(predicted_labels_and_confidences):
+    print(f'Image {i + 1}: Predicted Gesture: {predicted_label}, Confidence: {confidence}')

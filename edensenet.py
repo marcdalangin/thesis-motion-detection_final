@@ -16,8 +16,8 @@ from sklearn.model_selection import train_test_split
 num_classes = 10  # Number of classes in your dataset
 input_shape = (28, 28, 3)
 batch_size = 16
-epochs = 50
-DATADIR = "rgb_mixed_train_dataset"
+epochs = 15
+DATADIR = "train_dataset"
 CATEGORIES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 NAME = "edensenet{}".format(epochs)
 # tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
@@ -35,7 +35,6 @@ def load_data():
             img_array = cv2.imread(img_path, cv2.COLOR_BGR2RGB)
             img_array = cv2.resize(img_array, (28, 28))
             plt.imshow(img_array, cmap="gray")
-            # print(img_array)
             x_data.append(img_array)
             y_data.append(class_label)
 
@@ -48,10 +47,6 @@ x_train, y_train = load_data()
 
 # Scale images to the [0, 1] range
 x_train = x_train.astype("float32") / 255
-
-# Make sure images have shape (28, 28, 3)
-# x_train = np.expand_dims(x_train, -1)
-# x_train = np.repeat(x_train, 3, axis=-1)
 
 print("x_train shape:", x_train.shape)
 print(x_train.shape[0], "train samples")
@@ -124,7 +119,7 @@ model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 score = model.evaluate(x_test, y_test, verbose=0)
-model.save('trained_model_0821.h5')
+model.save('trained_model_0923v2.h5')
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
