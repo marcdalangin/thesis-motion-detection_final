@@ -569,3 +569,7 @@ Image 8: Predicted Gesture: 7, Confidence: 99.33%
 Image 9: Predicted Gesture: 8, Confidence: 98.22%
 Image 10: Predicted Gesture: 9, Confidence: 99.99%
 Average Confidence Rate: 99.35%
+
+
+
+
