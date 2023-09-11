@@ -7,7 +7,7 @@ import cv2
 model = load_model('model/trained_model_0903.h5')
 
 # Define the layer from which you want to visualize feature maps
-layer_name = 'dense '  # Change this to the desired layer name
+layer_name = 'dense'  # Change this to the desired layer name
 
 # Create a new model that outputs the feature maps of the selected layer
 visualization_model = Model(inputs=model.input, outputs=model.get_layer(layer_name).output)
