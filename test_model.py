@@ -40,17 +40,65 @@ def predict_hand_gestures(images):
 
 # Load and process multiple user input images
 image_paths = [
-    'validation_dataset/0/Sign_0_60.png',
-    'validation_dataset/1/Sign_1_46.png',
-    'validation_dataset/2/IMG_4101.JPG',
-    'validation_dataset/3/Sign_3_40.png',
-    'validation_dataset/4/IMG_4840.JPG',
-    'validation_dataset/5/Sign_5_24.png',
-    'validation_dataset/6/Sign_6_54.png',
-    'validation_dataset/7/Sign_7_55.png',
-    'validation_dataset/8/Sign_8_29.png',
-    'validation_dataset/9/IMG_4553.JPG',
-    # Add more image paths as needed
+    # First Testing:
+    # 'validation_dataset/0/Sign_0_60.png',
+    # 'validation_dataset/1/Sign_1_46.png',
+    # 'validation_dataset/2/IMG_4101.JPG',
+    # 'validation_dataset/3/Sign_3_40.png',
+    # 'validation_dataset/4/IMG_4840.JPG',
+    # 'validation_dataset/5/Sign_5_24.png',
+    # 'validation_dataset/6/Sign_6_54.png',
+    # 'validation_dataset/7/Sign_7_55.png',
+    # 'validation_dataset/8/Sign_8_29.png',
+    # 'validation_dataset/9/IMG_4553.JPG',
+
+    # Second Testing:
+    # 'validation_dataset/0/IMG_1118.JPG',
+    # 'validation_dataset/1/IMG_1119.JPG',
+    # 'validation_dataset/2/IMG_1120.JPG',
+    # 'validation_dataset/3/IMG_1121.JPG',
+    # 'validation_dataset/4/IMG_1122.JPG',
+    # 'validation_dataset/5/IMG_1123.JPG',
+    # 'validation_dataset/6/IMG_1124.JPG',
+    # 'validation_dataset/7/IMG_1125.JPG',
+    # 'validation_dataset/8/IMG_1126.JPG',
+    # 'validation_dataset/9/IMG_1127.JPG',
+    
+    # Third Testing:
+    # 'validation_dataset/0/Sign_0_60.png',
+    # 'validation_dataset/1/Sign_1_60.png',
+    # 'validation_dataset/2/Sign_2_60.png',
+    # 'validation_dataset/3/Sign_3_60.png',
+    # 'validation_dataset/4/Sign_4_60.png',
+    # 'validation_dataset/5/Sign_5_60.png',
+    # 'validation_dataset/6/Sign_6_60.png',
+    # 'validation_dataset/7/Sign_7_60.png',
+    # 'validation_dataset/8/Sign_8_60.png',
+    # 'validation_dataset/9/Sign_9_60.png',
+
+    # Fourth Testing:
+    # 'validation_dataset/0/Sign_0_59.png',
+    # 'validation_dataset/1/Sign_1_59.png',
+    # 'validation_dataset/2/Sign_2_59.png',
+    # 'validation_dataset/3/Sign_3_59.png',
+    # 'validation_dataset/4/Sign_4_59.png',
+    # 'validation_dataset/5/Sign_5_59.png',
+    # 'validation_dataset/6/Sign_6_59.png',
+    # 'validation_dataset/7/Sign_7_59.png',
+    # 'validation_dataset/8/Sign_8_59.png',
+    # 'validation_dataset/9/Sign_9_59.png',
+
+    # Fifth Testing:
+    'validation_dataset/0/Sign_0_57.png',
+    'validation_dataset/1/Sign_1_57.png',
+    'validation_dataset/2/Sign_2_57.png',
+    'validation_dataset/3/Sign_3_57.png',
+    'validation_dataset/4/Sign_4_57.png',
+    'validation_dataset/5/Sign_5_57.png',
+    'validation_dataset/6/Sign_6_57.png',
+    'validation_dataset/7/Sign_7_57.png',
+    'validation_dataset/8/Sign_8_57.png',
+    'validation_dataset/9/Sign_9_57.png',
 ]
 
 # Load the correct labels for validation images
