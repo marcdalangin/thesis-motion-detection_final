@@ -14,12 +14,10 @@ from sklearn.model_selection import train_test_split
 num_classes = 10  # Number of classes in your dataset
 input_shape = (28, 28, 3)
 batch_size = 16
-epochs = 15
+epochs = 50
 DATADIR = "train_dataset"
 CATEGORIES = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 NAME = "edensenet{}".format(epochs)
-# tensorboard = TensorBoard(log_dir='logs/{}'.format(NAME))
-
 
 # Load the data and split it between train and test sets
 def load_data():
@@ -71,15 +69,13 @@ model = keras.Sequential(
     ]
 )
 
-
-
 # Train the model
 model.summary()
 model.compile(loss="categorical_crossentropy", optimizer="adam", metrics=["accuracy"])
 # model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 history = model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validation_split=0.1)
 score = model.evaluate(x_test, y_test, verbose=0)
-model.save('trained_model_0903v2.h5')
+model.save('trained_model_0916.h5')
 plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True, show_trainable=True)
 print("Test loss:", score[0])
 print("Test accuracy:", score[1])
@@ -96,6 +92,3 @@ plt.title('Training History')
 
 # Save the figure as a .jpg file
 plt.savefig('training_history.jpg')
-
-# Show the plot
-plt.show()
